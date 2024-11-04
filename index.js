@@ -49,9 +49,9 @@ const reffilGroupId = "-4583166730";
 const infoChannelId = "-1002384649308";
 const infoChannelLink = "https://t.me/+_-_lDmPoiV9jYzIy";
 
-let mbankRequisites = '-----------';
-let optimaRequisites = '----------';
-let bakaiRequisites = '-----------';
+let mbankRequisites = '996990180603';
+let oDengi = '996990180603';
+let bakaiRequisites = '+996771130107';
 let shift = 'Не выбран';
 
 const defaultKeyboard = new Keyboard()
@@ -135,21 +135,21 @@ bot.callbackQuery("subscribed", async (ctx) => {
   }
 });
 
-bot.command("edil", async (ctx) => {
-  if (ctx.chat.type === "group") {
-    shift = 'Эдил';
-    mbankRequisites='321321321'
-    optimaRequisites='321321312312'
-    bakaiRequisites='321321321'
-    await ctx.reply("Приветствую Эдил, переключаю на вашу смену");
-  }
-});
+// bot.command("edil", async (ctx) => {
+//   if (ctx.chat.type === "group") {
+//     shift = 'Эдил';
+//     mbankRequisites='321321321'
+//     oDengi='321321312312'
+//     bakaiRequisites='321321321'
+//     await ctx.reply("Приветствую Эдил, переключаю на вашу смену");
+//   }
+// });
 
 bot.command("daniyar", async (ctx) => {
   if (ctx.chat.type === "group") {
     shift = 'Данияр';
     mbankRequisites='504061111'
-    optimaRequisites='4169585351289654'
+    oDengi='4169585351289654'
     bakaiRequisites='7760611111'
     await ctx.reply("Приветствую Данияр, переключаю на вашу смену");
   }
@@ -181,7 +181,7 @@ bot.hears("ПОПОЛНИТЬ", async (ctx) => {
   const inlineKeyboard = new InlineKeyboard()
     .text("MBANK", "mbank_button")
     .text("Bakai", "bakai_button")
-    .text("Optima", "optima_button");
+    .text("О! Деньги", "oDengi_button");
 
   session.isRefill = true;
 
@@ -204,11 +204,11 @@ bot.callbackQuery("bakai_button", async (ctx) => {
     session.bank = 'Bakai';
     await ctx.deleteMessage();
 });
-bot.callbackQuery("optima_button", async (ctx) => {
+bot.callbackQuery("oDengi_button", async (ctx) => {
   const session = getSession(ctx.from.id);
-    await ctx.reply("Вы выбрали Optima, укажите сумму пополнения(СОМ)");
+    await ctx.reply("Вы выбрали О! Деньги, укажите сумму пополнения(СОМ)");
     session.isBankChosen = true;
-    session.bank = 'Optima';
+    session.bank = 'oDengi';
     await ctx.deleteMessage();
 });
 
@@ -224,7 +224,7 @@ bot.hears("ВЫВЕСТИ", async (ctx) => {
   const inlineKeyboard = new InlineKeyboard()
     .text("MBANK", "mbank_button_output")
     .text("Bakai", "bakai_button_output")
-    .text("Optima", "optima_button_output");
+    .text("О! Деньги", "oDengi_button_output");
     const session = getSession(ctx.from.id);
 
     session.isOutput = true;
@@ -246,11 +246,11 @@ bot.callbackQuery("bakai_button_output", async (ctx) => {
   session.isBankChosen = true;
   session.bank = 'Bakai';
 });
-bot.callbackQuery("optima_button_output", async (ctx) => {
+bot.callbackQuery("oDengi_button_output", async (ctx) => {
   const session = getSession(ctx.from.id);
   await ctx.reply("Введите реквизиты для выбранного вами банка:");
   session.isBankChosen = true;
-  session.bank = 'Optima';
+  session.bank = 'oDengi';
   // console.log(session);
 });
 
@@ -345,7 +345,7 @@ bot.on("msg:text", async (ctx) => {
   const userInfo = ctx.update.message.from;
   const text = ctx.update.message.text;
   let textToNumber;
-  console.log(ctx.chat);
+  // console.log(ctx.chat);
   if (!isNaN(Number(text))) {
     textToNumber = parseInt(text);
     // console.log("parse to int = ", typeof textToNumber);
@@ -408,9 +408,9 @@ bot.on("msg:text", async (ctx) => {
               `Пополните средства на Bakai по нижеуказанному реквизиту👇\nBakai: ${bakaiRequisites}\nСумма: ${session.sumMany}\n\nОтправьте скриншот чека`
             );
           }
-          if (session.bank === "Optima") {
+          if (session.bank === "oDengi") {
             await ctx.reply(
-              `Пополните средства на Optima по нижеуказанному реквизиту👇\nOptima: ${optimaRequisites}\nСумма: ${session.sumMany}\n\nОтправьте скриншот чека`
+              `Пополните средства на О! денги по нижеуказанному реквизиту👇\nО! денги: ${oDengi}\nСумма: ${session.sumMany}\n\nОтправьте скриншот чека`
             );
           }
           return (session.waitCheck = true);
