@@ -78,7 +78,7 @@ bot.command("start", async (ctx) => {
         memberInfo.status === "administrator" ||
         memberInfo.status === "creator"
       ) {
-        await ctx.reply("Приветствую на кассе 1Хбет", {
+        await ctx.reply("Пополнение/Вывод средств из 1X!\n\nБез Комиссии!\n📥Пополнение: 0%\n📤Вывод: 0%\nРаботаем: 24/7", {
           reply_markup: defaultKeyboard,
         });
       } else {
@@ -355,7 +355,7 @@ bot.on("msg:text", async (ctx) => {
   if (session.isBankChosen && session.isRefill) {
     if (typeof textToNumber === "number") {
       //   console.log("text is number");
-      if (textToNumber >= 10 && textToNumber <= 10000) {
+      if (textToNumber >= 40 && textToNumber <= 10000) {
         session.isBankChosen = false;
         session.isCashWritten = true;
         session.sumMany = textToNumber;
@@ -363,7 +363,7 @@ bot.on("msg:text", async (ctx) => {
         return await ctx.replyWithPhoto(new InputFile("img/example.jpg"));
       } else {
         await ctx.reply(
-          "Сумма депозита указана некорректна, попробуйте снова \n\nМинимум: 10 сом\nМаксимум: 10000 сом"
+          "Сумма депозита указана некорректна, попробуйте снова \n\nМинимум: 40 сом\nМаксимум: 10000 сом"
         );
       }
     } else {
@@ -451,7 +451,7 @@ bot.on("msg:text", async (ctx) => {
   if (session.isOutput && session.isRequisitesWritten) {
     if (typeof textToNumber === "number") {
       //   console.log("text is number");
-      if (textToNumber >= 10 && textToNumber <= 10000) {
+      if (textToNumber >= 40 && textToNumber <= 10000) {
         session.isRequisitesWritten = false;
         session.isCashWritten = true;
         session.sumMany = textToNumber;
@@ -459,7 +459,7 @@ bot.on("msg:text", async (ctx) => {
         return await ctx.replyWithPhoto(new InputFile("img/example.jpg"));
       } else {
         await ctx.reply(
-          "Сумма вывода указана некорректна, попробуйте снова \n\nМинимум: 10 сом\nМаксимум: 10000 сом"
+          "Сумма вывода указана некорректна, попробуйте снова \n\nМинимум: 40 сом\nМаксимум: 10000 сом"
         );
       }
     } else {
